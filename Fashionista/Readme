@@ -1,0 +1,3 @@
+Enter the project directory
+Run the command "nodemon server.js" to start the server
+Enter the client directory and run the command "ng serve -o"
