@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md border bg-light">
+    <h1 class="display-3 text-center m-3">Fashionista</h1>
+    <p class="text-center m-4">
+      Fashionista is an online clothing store for all sorts of fashion wear. Search for shirts, jeans,
+      shoes, and more from all different brands!
+    </p>
+    <p class="text-center">
+      <img
+        src="./assets/images/sweaters.jpg"
+        class="img-fluid rounded border border-info p-1"
+        alt="Products Info"
+      />
+    </p>
+  </div>
+  
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="mainModal" [ngStyle]="{ display: display }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-dark text-white text-center">
+        <h4 class="modal-title" [innerHTML]="modalHeader ? modalHeader : 'Success!'"></h4>
+        <button type="button" (click)="onCloseHandled()" class="close" data-dismiss="modal" routerLink="/">
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" *ngIf="modalBody" [innerHTML]="modalBody"></div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" (click)="onCloseHandled()" class="btn btn-danger" data-dismiss="modal" routerLink="/">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

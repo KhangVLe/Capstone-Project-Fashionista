@@ -1,0 +1,84 @@
+<div class="container card bg-light p-2 my-2">
+  <!-- spinner -->
+  <div *ngIf="isLoading" class="spinner-border text-danger" role="status"><span class="sr-only">Loading...</span></div>
+  <!-- alert -->
+  <div *ngIf="isEmpty" class="alert alert-danger">{{ warning }}</div>
+  <!-- form 1 -->
+  <form #registerForm1="ngForm" (ngSubmit)="onStageOneComplete(registerForm1)" *ngIf="!Register1" novalidate>
+    <p>Register</p>
+    <!-- email / username -->
+    <div class="form-group">
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        placeholder="E-Mail"
+        [ngClass]="{ 'is-invalid': email.errors && email.touched }"
+        ngModel
+        #email="ngModel"
+        required
+        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      />
+      <div [hidden]="!email.errors?.required" class="invalid-feedback">Email is required</div>
+      <div [hidden]="!email.errors?.pattern" class="invalid-feedback">Email is not valid</div>
+    </div>
+    <!-- password -->
+    <div class="form-group">
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="Password"
+        [ngClass]="{ 'is-invalid': password.errors && password.touched }"
+        ngModel
+        #password="ngModel"
+        required
+        minlength="4"
+      />
+      <div [hidden]="!password.errors?.required" class="invalid-feedback">Password is required</div>
+      <div [hidden]="!password.errors?.minlength" class="invalid-feedback">
+        Password must be at least 4 characters
+      </div>
+    </div>
+    <!-- password confirmation -->
+    <div class="form-group">
+      <input
+        type="password"
+        name="password2"
+        class="form-control"
+        placeholder="Confirm Password"
+        [ngClass]="{ 'is-invalid': password2.errors && password2.touched }"
+        ngModel
+        #password2="ngModel"
+        required
+        minlength="4"
+      />
+      <div [hidden]="!password2.errors?.required" class="invalid-feedback">Password confirmation is required</div>
+    </div>
+    <button type="submit" class="btn btn-info">Register<fa name="arrow-right" class="ml-2"></fa></button>
+  </form>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="registerModal" [ngStyle]="{ display: display }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark text-white text-center">
+          <h4 class="modal-title" [innerHTML]="modalHeader ? modalHeader : 'Success!'"></h4>
+          <button type="button" (click)="onCloseHandled()" class="close" data-dismiss="modal" routerLink="/">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body" *ngIf="modalBody" [innerHTML]="modalBody"></div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" (click)="onCloseHandled()" class="btn btn-danger" data-dismiss="modal" routerLink="/">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
